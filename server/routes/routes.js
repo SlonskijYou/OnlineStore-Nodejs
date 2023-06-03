@@ -19,5 +19,6 @@ router.post("/brandcreate", BrandController.create);
 router.get("/brandgetAll", BrandController.getAll);
 
 router.post("/devicecreate", DeviceController.create);
+router.put("/updaterating", DeviceController.updateRating);
 
 export default router;

@@ -20,7 +20,7 @@ const Device = DataBase.define("device", {
   description: { type: DataTypes.STRING },
   price: { type: DataTypes.INTEGER, allowNull: false },
   quantity: { type: DataTypes.INTEGER, defaultValue: 5 },
-  rating: { type: DataTypes.INTEGER, defaultValue: 0 },
+  rating: { type: DataTypes.FLOAT, defaultValue: 0 },
   sumrating: { type: DataTypes.INTEGER, defaultValue: 0 },
   numrating: { type: DataTypes.INTEGER, defaultValue: 0 },
   img: { type: DataTypes.STRING },

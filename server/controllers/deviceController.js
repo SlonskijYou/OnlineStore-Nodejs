@@ -36,6 +36,38 @@ class DeviceController {
       return res.json(e);
     }
   }
+
+  async updateRating(req, res) {
+    try {
+      const id = req.query.id;
+      const { rating } = req.body;
+      const sum = (await Device.findOne({ where: { id: id } })).dataValues
+        .sumrating;
+      const num = (await Device.findOne({ where: { id: id } })).dataValues
+        .numrating;
+      await Device.update(
+        {
+          sumrating: sum + rating,
+          numrating: num + 1,
+        },
+        { where: { id: id } }
+      );
+      await Device.update(
+        {
+          rating: (
+            (await Device.findOne({ where: { id: id } })).dataValues.sumrating /
+            (
+              await Device.findOne({ where: { id: id } })
+            ).dataValues.numrating
+          ).toFixed(1),
+        },
+        { where: { id: id } }
+      );
+      return res.json(await Device.findOne({ where: { id: id } }));
+    } catch (e) {
+      return res.json(e);
+    }
+  }
 }
 
 export default new DeviceController();
